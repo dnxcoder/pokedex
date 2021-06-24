@@ -18,6 +18,7 @@ interface iKindPokemon extends InputHTMLAttributes<HTMLDivElement> {
 
 export const Container = styled.div`
 
+cursor: pointer;
 box-sizing: border-box;
 height: 240px;
 width: 244px;
@@ -55,8 +56,6 @@ font-weight: bold;
 font-size: 14pt;
 position: relative;
 z-index: 4;
-
-
 `;
 
 export const PokemonIMG = styled.img`
