@@ -1,7 +1,7 @@
-import React, { InputHTMLAttributes, useEffect } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import { takePokemonByCode } from '../../functions/takePokemonByCode';
 import { Container, KindPokemon, PokemonIMG, PokebolaImg, PokeCode } from './styles';
-import { iPokemon, ITypes } from '../../interfaces/';
+import { ITypes } from '../../interfaces/';
 import pokeballImg from '../../assets/pokeball-logo.png'
 
 interface DivProps extends InputHTMLAttributes<HTMLDivElement> {

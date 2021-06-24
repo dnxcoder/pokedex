@@ -1,6 +1,6 @@
-import React, { InputHTMLAttributes } from 'react';
-import styled, { StyledComponentBase } from 'styled-components';
-import { myColors, myFonts } from '../../constants'
+import { InputHTMLAttributes } from 'react';
+import styled from 'styled-components';
+import { myFonts } from '../../constants'
 import { backgroundKindColor } from '../../functions/backgroundKindColor';
 import { kindColors } from '../../functions/kindColors';
 import { ITypes } from '../../interfaces';
