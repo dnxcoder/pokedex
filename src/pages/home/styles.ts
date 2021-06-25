@@ -22,6 +22,12 @@ interface iKindPokemon extends InputHTMLAttributes<HTMLDivElement> {
     kind: string;
 }
 
+interface iPkmnImagePosition extends InputHTMLAttributes<HTMLImageElement> {
+
+    pkmnImagePosition?:string;
+    pkmnTransition?:string;
+}
+
 
 export const Screen = styled.div`
 
@@ -259,6 +265,14 @@ position: absolute;
     width:4em;
     height: 4em;
     cursor: pointer;
+
+`;
+
+export const PokemonImgStyled = styled.img<iPkmnImagePosition>`
+
+position: relative;
+transition: ${(props)=> props.pkmnTransition } ;
+left:${(props)=> props.pkmnImagePosition} ;
 
 `;
 

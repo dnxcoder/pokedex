@@ -13,13 +13,15 @@ import {
     KindPokemon,
     LeftButton,
     RightButton,
-    ButtonCloseModal
+    ButtonCloseModal,
+    PokemonImgStyled
 } from './styles';
 import pokemonListJson from '../../Json/pokemonsList.json';
 
 import { iPokemon } from '../../interfaces';
 import { convertCode } from '../../functions/convertCode';
 import { ArrowBackSharp, ArrowForwardSharp, CloseOutline } from 'react-ionicons'
+import { takePokemonByCode } from '../../functions/takePokemonByCode';
 
 export default function Home() {
 
@@ -28,6 +30,7 @@ export default function Home() {
     const [selectedPokemon, setSelectedPokemon] = useState<iPokemon>();
     const [moveModal, setMoveModal] = useState("100%");
 
+    const [nextPokemonMove, setNextPokemonMove] = useState({ position: "0%", transition: "0s" });
 
     useEffect(() => {
 
@@ -65,7 +68,23 @@ export default function Home() {
 
         const newPokemonSelected = pokemonListJson[selectedPokemon?.id || 0];
 
-        setSelectedPokemon(newPokemonSelected);
+
+        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "-100%" });
+
+        
+        setTimeout(() => {
+
+            setSelectedPokemon(newPokemonSelected);
+            setNextPokemonMove({ transition: "0s", position: "100%" });
+        }, 600);
+
+        
+        setTimeout(() => {
+
+            setSelectedPokemon(newPokemonSelected);
+            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%" });
+        }, 700);
+
     }
 
     function previousPokemon() {
@@ -74,7 +93,20 @@ export default function Home() {
 
         const newPokemonSelected = pokemonListJson[previousIndex];
 
-        setSelectedPokemon(newPokemonSelected)
+        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "100%" });
+
+        
+        setTimeout(() => {
+
+            setSelectedPokemon(newPokemonSelected);
+            setNextPokemonMove({ transition: "0s", position: "-100%" });
+        }, 600);
+
+        setTimeout(() => {
+
+            setSelectedPokemon(newPokemonSelected);
+            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%" });
+        }, 700);
     }
 
     return (
@@ -135,9 +167,10 @@ export default function Home() {
                                 width="40px"
                             />
                         </LeftButton>
-                        <PokemonIMG
-                            pokeCode={selectedPokemon?.id || 0}
-                            height="400px"
+                        <PokemonImgStyled
+                            pkmnTransition={nextPokemonMove.transition}
+                            pkmnImagePosition={nextPokemonMove.position}
+                            src={takePokemonByCode(selectedPokemon?.id || 1)}
                         />
                         <RightButton backgroundColor={selectedPokemon?.type[0].type.name || ''}
                             onClick={nextPokemon}
