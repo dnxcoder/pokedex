@@ -57,7 +57,21 @@ export default function Home() {
         event.stopPropagation();
     }
 
+    function nextPokemon() {
 
+        const newPokemonSelected = pokemonListJson[selectedPokemon?.id || 0];
+
+        setSelectedPokemon(newPokemonSelected);
+    }
+
+    function previousPokemon(){
+
+        const previousIndex = ((selectedPokemon?.id || 0) -2);
+
+        const newPokemonSelected = pokemonListJson[previousIndex];
+
+        setSelectedPokemon(newPokemonSelected)
+    }
 
     return (
         <Screen>
@@ -77,7 +91,6 @@ export default function Home() {
                                 kind={pokemon.type}
                                 onClick={() => openModal({ ...pokemon })}
                             />)
-
                     })
                 }
             </CardsContainer>
@@ -109,7 +122,9 @@ export default function Home() {
                                 )
                             })
                         }
-                        <LeftButton backgroundColor={selectedPokemon?.type[0].type.name || ''}>
+                        <LeftButton backgroundColor={selectedPokemon?.type[0].type.name || ''}
+                        onClick={previousPokemon}
+                        >
                             <ArrowBackSharp
                                 color={"#FFF"}
                                 height="40px"
@@ -120,7 +135,9 @@ export default function Home() {
                             pokeCode={selectedPokemon?.id || 0}
                             height="400px"
                         />
-                        <RightButton backgroundColor={selectedPokemon?.type[0].type.name || ''} >
+                        <RightButton backgroundColor={selectedPokemon?.type[0].type.name || ''}
+                            onClick={nextPokemon}
+                        >
                             <ArrowForwardSharp
                                 color={"#FFF"}
                                 height="40px"
