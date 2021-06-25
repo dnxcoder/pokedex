@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card';
-import PokemonIMG from '../../components/PokemonIMG';
 
 import {
     Screen,
@@ -18,7 +17,7 @@ import {
 } from './styles';
 import pokemonListJson from '../../Json/pokemonsList.json';
 
-import { iPokemon, iPkmnImagePosition } from '../../interfaces';
+import { iPokemon } from '../../interfaces';
 import { convertCode } from '../../functions/convertCode';
 import { ArrowBackSharp, ArrowForwardSharp, CloseOutline } from 'react-ionicons'
 import { takePokemonByCode } from '../../functions/takePokemonByCode';
