@@ -26,6 +26,7 @@ export default function Home() {
     const [pokemonList, setPokemonList] = useState<Array<iPokemon>>([]);
     const [modalVisible, setModalVisible] = useState('none');
     const [selectedPokemon, setSelectedPokemon] = useState<iPokemon>();
+    const [moveModal, setMoveModal] = useState("100%");
 
 
     useEffect(() => {
@@ -43,13 +44,16 @@ export default function Home() {
 
 
         setSelectedPokemon({ ...props });
+        setMoveModal("0%");
         setModalVisible('flex');
 
     }
 
     function closeModal() {
 
+
         setModalVisible('none');
+        setMoveModal("100%");
     }
 
     function stopPropagation(event: MouseEvent) {
@@ -64,9 +68,9 @@ export default function Home() {
         setSelectedPokemon(newPokemonSelected);
     }
 
-    function previousPokemon(){
+    function previousPokemon() {
 
-        const previousIndex = ((selectedPokemon?.id || 0) -2);
+        const previousIndex = ((selectedPokemon?.id || 0) - 2);
 
         const newPokemonSelected = pokemonListJson[previousIndex];
 
@@ -75,7 +79,6 @@ export default function Home() {
 
     return (
         <Screen>
-
             <Header>
                 <span>Welcome to Pokedex Online</span>
             </Header>
@@ -97,6 +100,7 @@ export default function Home() {
             <ModalBackground
                 visible={modalVisible}
                 onClick={closeModal}
+                modalPosition={moveModal}
             >
                 <Modal
                     onClick={stopPropagation}
@@ -123,7 +127,7 @@ export default function Home() {
                             })
                         }
                         <LeftButton backgroundColor={selectedPokemon?.type[0].type.name || ''}
-                        onClick={previousPokemon}
+                            onClick={previousPokemon}
                         >
                             <ArrowBackSharp
                                 color={"#FFF"}

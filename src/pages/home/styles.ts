@@ -8,11 +8,13 @@ import { InputHTMLAttributes } from 'react';
 interface iDarkBackgroundModal {
 
     visible: string;
+    modalPosition?:string;
 }
 
 interface iModal extends InputHTMLAttributes<HTMLDivElement> {
 
     backgroundColor: string;
+    modalPosition?:string;
 }
 
 interface iKindPokemon extends InputHTMLAttributes<HTMLDivElement> {
@@ -22,16 +24,19 @@ interface iKindPokemon extends InputHTMLAttributes<HTMLDivElement> {
 
 
 export const Screen = styled.div`
+
 display:flex;
 flex-direction: column;
 padding:0 200px 0 200px;
 background-color: #E96969;
 height: 100vh;
-overflow: hidden;
 background-image: url(${pokeballLogo});
 background-repeat:no-repeat;
 background-size: contain;
 background-position: 90%;
+position: relative;
+overflow: hidden;
+
 
 @media (max-width:480px){
 
@@ -90,7 +95,7 @@ top:5%;
 right: 10%;
 `;
 
-export const ModalBackground: any = styled.div`
+export const ModalBackground: any = styled.div<iDarkBackgroundModal>`
 
 background-color: rgba(0,0,0,0.5);
 
@@ -103,17 +108,19 @@ z-index:6;
 display: flex;
 align-items: center;
 justify-content: center;
-display: ${(props: iDarkBackgroundModal) => props.visible};
-
+top: ${(props)=> props.modalPosition};
+//display: ${(props) => props.visible};
+overflow: hidden;
+transition:0.5s ease-in-out;
 
 `;
 
-export const Modal: any = styled.div`
+export const Modal: any = styled.div<iModal>`
 
 color:#FFF;
 width: 30vw;
 height: 95vh;
-background-color:${(props: iModal) => backgroundKindColor(props.backgroundColor)};
+background-color:${(props) => backgroundKindColor(props.backgroundColor)};
 background-image: url(${pokeballLogo});
 background-repeat: no-repeat;
 background-position: top;
@@ -122,7 +129,8 @@ border-radius: 25px;
 box-shadow: 8px 9px 7px -4px rgba(0,0,0,0.52);
 box-sizing: border-box;
 padding: 30px 50px 30px 50px;
-position: relative;
+position: absolute;
+
 overflow: hidden;
 
 
