@@ -1,6 +1,5 @@
 import React, { InputHTMLAttributes } from 'react';
-import { takePokemonByCode } from '../../functions/takePokemonByCode';
-import { Container, KindPokemon, PokemonStyledIMG, PokebolaImg, PokeCode } from './styles';
+import { Container, KindPokemon, PokebolaImg, PokeCode } from './styles';
 import { ITypes } from '../../interfaces/';
 import pokeballImg from '../../assets/pokeball-logo.png'
 import PokemonIMG from '../PokemonIMG'
