@@ -17,3 +17,14 @@ export interface ITypes {
     }
 
 }
+
+export interface iPokemonIMG{
+
+    pokeCode:number;
+    width?:string;
+    height?:string;
+    position?:string;
+    zindex?:string;
+    right?:string;
+    bottom?:string;
+}

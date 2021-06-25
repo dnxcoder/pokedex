@@ -39,6 +39,12 @@ span {
     font-weight:bold;
 }
 
+@media (max-width:480px){
+
+width:100%;
+
+}
+
 `;
 
 export const KindPokemon = styled.div`
@@ -58,7 +64,7 @@ position: relative;
 z-index: 4;
 `;
 
-export const PokemonIMG = styled.img`
+export const PokemonStyledIMG = styled.img`
   position: absolute;
   z-index: 5;
     height:178px;

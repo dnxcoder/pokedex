@@ -10,9 +10,7 @@ interface iDarkBackgroundModal {
     visible: string;
 }
 
-
-
-interface iModal extends InputHTMLAttributes<HTMLDivElement>{
+interface iModal extends InputHTMLAttributes<HTMLDivElement> {
 
     backgroundColor: string;
 }
@@ -34,6 +32,21 @@ background-image: url(${pokeballLogo});
 background-repeat:no-repeat;
 background-size: contain;
 background-position: 90%;
+
+@media (max-width:480px){
+
+    padding: 0 5px 0 5px;
+}
+
+@media (max-width:768px){
+
+padding: 0 5px 0 5px;
+}
+
+@media (max-width:1400px){
+
+padding: 0 5px 0 5px;
+}
 `;
 
 export const CardsContainer = styled.div`
@@ -76,7 +89,6 @@ position:absolute;
 top:5%;
 right: 10%;
 `;
-
 
 export const ModalBackground: any = styled.div`
 
@@ -123,6 +135,26 @@ font-weight: bold;
 font-size: 2.5em;
 
 };
+
+@media (min-width: 320px) and (max-width:480px){
+width: 95%;
+padding: 20px 35px 0 35px;
+font-size:0.7em;
+
+}
+
+@media (min-width: 481px) and (max-width:768px){
+width: 95%;
+padding: 20px 35px 0 35px;
+
+}
+
+@media (min-width: 769px) and (max-width:1024px){
+width: 95%;
+padding: 20px 35px 0 35px;
+
+}
+
 `;
 
 export const KindPokemon = styled.div`
@@ -193,7 +225,14 @@ width: 100%;
 left:0;
 height:50%;
 background-color: #FFF;
-border-radius:40px;
+border-radius:25px;
+bottom:0;
 
+@media (max-width:480px){
+
+bottom:0;
+
+
+}
 
 `;

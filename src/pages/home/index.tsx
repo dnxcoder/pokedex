@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card';
+import PokemonIMG from '../../components/PokemonIMG';
+
 import {
     Screen,
     CardsContainer,
@@ -17,13 +19,13 @@ import pokemonListJson from '../../Json/pokemonsList.json';
 import { iPokemon } from '../../interfaces';
 import { convertCode } from '../../functions/convertCode';
 import { ArrowBackSharp, ArrowForwardSharp } from 'react-ionicons'
-import { takePokemonByCode } from '../../functions/takePokemonByCode';
 
 export default function Home() {
 
     const [pokemonList, setPokemonList] = useState<Array<iPokemon>>([]);
     const [modalVisible, setModalVisible] = useState('none');
     const [selectedPokemon, setSelectedPokemon] = useState<iPokemon>();
+
 
     useEffect(() => {
 
@@ -105,8 +107,9 @@ export default function Home() {
                                 width="40px"
                             />
                         </LeftButton>
-                        <img src={takePokemonByCode(selectedPokemon?.id || 0)}
-                            alt={"pokemon"}
+                        <PokemonIMG
+                            pokeCode={selectedPokemon?.id || 0}
+                            height="400px"
                         />
                         <RightButton backgroundColor={selectedPokemon?.type[0].type.name || ''} >
                             <ArrowForwardSharp
