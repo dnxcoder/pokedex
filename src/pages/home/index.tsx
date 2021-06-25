@@ -18,7 +18,7 @@ import {
 } from './styles';
 import pokemonListJson from '../../Json/pokemonsList.json';
 
-import { iPokemon } from '../../interfaces';
+import { iPokemon, iPkmnImagePosition } from '../../interfaces';
 import { convertCode } from '../../functions/convertCode';
 import { ArrowBackSharp, ArrowForwardSharp, CloseOutline } from 'react-ionicons'
 import { takePokemonByCode } from '../../functions/takePokemonByCode';
@@ -30,7 +30,7 @@ export default function Home() {
     const [selectedPokemon, setSelectedPokemon] = useState<iPokemon>();
     const [moveModal, setMoveModal] = useState("100%");
 
-    const [nextPokemonMove, setNextPokemonMove] = useState({ position: "0%", transition: "0s" });
+    const [nextPokemonMove, setNextPokemonMove] = useState({ position: "0%", transition: "0s", height:'auto' });
 
     useEffect(() => {
 
@@ -69,20 +69,20 @@ export default function Home() {
         const newPokemonSelected = pokemonListJson[selectedPokemon?.id || 0];
 
 
-        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "-100%" });
+        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "-100%", height:'0%' });
 
         
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0s", position: "100%" });
+            setNextPokemonMove({ transition: "0s", position: "100%", height:'0%' });
         }, 600);
 
         
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%" });
+            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", height:'100%' });
         }, 700);
 
     }
@@ -93,19 +93,19 @@ export default function Home() {
 
         const newPokemonSelected = pokemonListJson[previousIndex];
 
-        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "100%" });
+        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "100%", height:'0%' });
 
         
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0s", position: "-100%" });
+            setNextPokemonMove({ transition: "0s", position: "-100%", height:'0%' });
         }, 600);
 
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%" });
+            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", height:'100%' });
         }, 700);
     }
 
@@ -170,6 +170,7 @@ export default function Home() {
                         <PokemonImgStyled
                             pkmnTransition={nextPokemonMove.transition}
                             pkmnImagePosition={nextPokemonMove.position}
+                            pkmnImageHeight={nextPokemonMove.height}
                             src={takePokemonByCode(selectedPokemon?.id || 1)}
                         />
                         <RightButton backgroundColor={selectedPokemon?.type[0].type.name || ''}

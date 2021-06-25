@@ -26,6 +26,7 @@ interface iPkmnImagePosition extends InputHTMLAttributes<HTMLImageElement> {
 
     pkmnImagePosition?:string;
     pkmnTransition?:string;
+    pkmnImageHeight?:string;
 }
 
 
@@ -271,9 +272,10 @@ position: absolute;
 export const PokemonImgStyled = styled.img<iPkmnImagePosition>`
 
 position: relative;
-transition: ${(props)=> props.pkmnTransition } ;
+transition: ${(props)=> props.pkmnTransition} ;
 left:${(props)=> props.pkmnImagePosition} ;
-
+height: ${(props)=> props.pkmnImageHeight};
+object-fit: contain;
 `;
 
 export const RightButton = styled.div`

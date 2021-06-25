@@ -28,3 +28,10 @@ export interface iPokemonIMG{
     right?:string;
     bottom?:string;
 }
+
+export interface iPkmnImagePosition  {
+
+    pkmnImagePosition?:string;
+    pkmnTransition?:string;
+    pkmnSize?:string;
+}
