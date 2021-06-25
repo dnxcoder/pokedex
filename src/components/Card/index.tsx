@@ -29,9 +29,6 @@ const Card: React.FC<DivProps> = (props) => {
             break;
     }
 
-
-    console.log(props);
-
     return (
         <Container {...props}>
             <PokeCode >
@@ -39,8 +36,8 @@ const Card: React.FC<DivProps> = (props) => {
             </PokeCode>
             <span>{props.pokemonName}</span>
 
-            {props.kind.map((kind) => (
-                <KindPokemon kind={kind.type.name}>
+            {props.kind.map((kind, index) => (
+                <KindPokemon kind={kind.type.name} key={index}>
                     {kind.type.name}
                 </KindPokemon>
             ))}

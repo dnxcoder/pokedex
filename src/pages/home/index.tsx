@@ -12,13 +12,14 @@ import {
     FooterModal,
     KindPokemon,
     LeftButton,
-    RightButton
+    RightButton,
+    ButtonCloseModal
 } from './styles';
 import pokemonListJson from '../../Json/pokemonsList.json';
 
 import { iPokemon } from '../../interfaces';
 import { convertCode } from '../../functions/convertCode';
-import { ArrowBackSharp, ArrowForwardSharp } from 'react-ionicons'
+import { ArrowBackSharp, ArrowForwardSharp, CloseOutline } from 'react-ionicons'
 
 export default function Home() {
 
@@ -46,11 +47,17 @@ export default function Home() {
 
     }
 
-    function closeModal(event: MouseEvent) {
+    function closeModal() {
 
-        event.stopPropagation();
         setModalVisible('none');
     }
+
+    function stopPropagation(event: MouseEvent) {
+
+        event.stopPropagation();
+    }
+
+
 
     return (
         <Screen>
@@ -60,10 +67,11 @@ export default function Home() {
             </Header>
             <CardsContainer>
                 {
-                    pokemonList.map((pokemon) => {
+                    pokemonList.map((pokemon, index) => {
 
                         return (
                             <Card
+                                key={index}
                                 pokemonName={pokemon.name}
                                 pokeCode={pokemon.id}
                                 kind={pokemon.type}
@@ -78,6 +86,7 @@ export default function Home() {
                 onClick={closeModal}
             >
                 <Modal
+                    onClick={stopPropagation}
                     backgroundColor={selectedPokemon?.type[0].type.name}
                 >
                     <header>
@@ -120,9 +129,16 @@ export default function Home() {
                         </RightButton>
                     </MiddleModal>
                     <FooterModal>
-
                     </FooterModal>
                 </Modal>
+                <ButtonCloseModal
+                    onClick={closeModal}>
+                    <CloseOutline
+                        color="#FFF"
+                        height="40px"
+                        width="40px"
+                    />
+                </ButtonCloseModal>
             </ModalBackground>
         </Screen>
     )

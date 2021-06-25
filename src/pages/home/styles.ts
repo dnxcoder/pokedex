@@ -145,7 +145,7 @@ font-size:0.7em;
 
 @media (min-width: 481px) and (max-width:768px){
 width: 95%;
-padding: 20px 35px 0 35px;
+padding: 20px 85px 0 85px;
 
 }
 
@@ -153,6 +153,56 @@ padding: 20px 35px 0 35px;
 width: 95%;
 padding: 20px 35px 0 35px;
 
+}
+
+`;
+
+export const ButtonCloseModal = styled.div`
+
+
+@media (min-width: 320px) and (max-width:480px){
+width:50px;
+height:50px;
+background-color: #F15152;
+display: flex;
+justify-content:center;
+align-items: center;
+position: absolute;
+right: 0px;
+top: 0px;
+border-radius:25px;
+font-size:0.7em;
+cursor: pointer;
+}
+
+@media (min-width: 320px) and (max-width:480px){
+width:50px;
+height:50px;
+background-color: #F15152;
+display: flex;
+justify-content:center;
+align-items: center;
+position: absolute;
+right: 0px;
+top: 0px;
+border-radius:25px;
+font-size:0.7em;
+cursor: pointer;
+}
+
+@media (min-width: 768px) and (max-width:1024px){
+width:100px;
+height:100px;
+background-color: #F15152;
+display: flex;
+justify-content:center;
+align-items: center;
+position: absolute;
+right: 0px;
+top: 0px;
+border-radius:50px;
+font-size:0.7em;
+cursor: pointer;
 }
 
 `;
