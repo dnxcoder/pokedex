@@ -5,6 +5,7 @@ export interface iPokemon {
     type: Array<ITypes>;
     height: number;
     weight: number;
+    behavior:string;
 
 }
 

@@ -34,13 +34,6 @@ const Card: React.FC<DivProps> = (props) => {
             <PokeCode >
                 {codeFormated}
             </PokeCode>
-            <span>{props.pokemonName}</span>
-
-            {props.kind.map((kind, index) => (
-                <KindPokemon kind={kind.type.name} key={index}>
-                    {kind.type.name}
-                </KindPokemon>
-            ))}
             <PokemonIMG
                 pokeCode={props.pokeCode}
                 height="178px"
@@ -48,9 +41,15 @@ const Card: React.FC<DivProps> = (props) => {
                 zindex="5"
                 right="0"
                 bottom="0"
-            />
-            <PokebolaImg src={pokeballImg} />
+            />           
+            <span>{props.pokemonName}</span>
 
+            {props.kind.map((kind, index) => (
+                <KindPokemon kind={kind.type.name} key={index}>
+                    {kind.type.name}
+                </KindPokemon>
+            ))}
+             <PokebolaImg src={pokeballImg} />
         </Container>
     )
 

@@ -40,7 +40,7 @@ span {
 }
 
 
-:hover img{
+:hover :nth-child(2){
     animation: shakePokemon 0.1s linear 3 forwards ;
 }
 

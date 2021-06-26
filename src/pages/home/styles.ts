@@ -8,13 +8,13 @@ import { InputHTMLAttributes } from 'react';
 interface iDarkBackgroundModal {
 
     visible: string;
-    modalPosition?:string;
+    modalPosition?: string;
 }
 
 interface iModal extends InputHTMLAttributes<HTMLDivElement> {
 
     backgroundColor: string;
-    modalPosition?:string;
+    modalPosition?: string;
 }
 
 interface iKindPokemon extends InputHTMLAttributes<HTMLDivElement> {
@@ -24,9 +24,9 @@ interface iKindPokemon extends InputHTMLAttributes<HTMLDivElement> {
 
 interface iPkmnImagePosition extends InputHTMLAttributes<HTMLImageElement> {
 
-    pkmnImagePosition?:string;
-    pkmnTransition?:string;
-    pkmnImageHeight?:string;
+    pkmnImagePosition?: string;
+    pkmnTransition?: string;
+    pkmnImageHeight?: string;
 }
 
 
@@ -115,7 +115,7 @@ z-index:6;
 display: flex;
 align-items: center;
 justify-content: center;
-top: ${(props)=> props.modalPosition};
+top: ${(props) => props.modalPosition};
 //display: ${(props) => props.visible};
 overflow: hidden;
 transition:0.5s ease-in-out;
@@ -289,15 +289,16 @@ position: absolute;
 export const PokemonImgStyled = styled.img<iPkmnImagePosition>`
 
 position: relative;
-transition: ${(props)=> props.pkmnTransition} ;
-left:${(props)=> props.pkmnImagePosition} ;
-height: ${(props)=> props.pkmnImageHeight};
+transition: ${(props) => props.pkmnTransition} ;
+left:${(props) => props.pkmnImagePosition} ;
+height: ${(props) => props.pkmnImageHeight};
 object-fit: contain;
-
 
 :hover{
     animation: movePokemon infinite 1s linear;
 }
+
+
 
 @keyframes movePokemon {
 
@@ -317,6 +318,7 @@ object-fit: contain;
         transform: rotate(0deg);
     }
 }
+
 `;
 
 export const RightButton = styled.div`
@@ -340,14 +342,68 @@ width: 100%;
 left:0;
 height:50%;
 background-color: #FFF;
+box-sizing: border-box;
+font-size:22pt;
+line-height: 50px;
+font-weight: bold;
+padding:30px 20px 30px 20px;
+font-family: ${myFonts.title};
+color: #666666;
 border-radius:25px;
 bottom:0;
+text-align: center;
 
-@media (max-width:480px){
+@media (min-width: 320px) and (max-width:480px){
 
-bottom:0;
-
+font-size:16pt;
 
 }
 
+@media (min-width: 767px) and (max-width:1024px){
+
+    font-size:22pt;
+
+}
+
+@media (min-width: 1023px) and (max-width:1366px){
+
+font-size:28pt;
+
+}
+
+`;
+
+export const TitleFooter = styled.div`
+
+display:flex;
+width:100%;
+justify-content:space-around;
+margin-bottom: 30px;
+
+@media (min-width: 320px) and (max-width:480px){
+
+font-size:16pt;
+margin-bottom: 10px;
+
+}
+
+`;
+
+export const ButtonToggle = styled.div`
+
+
+box-sizing: border-box;
+border:2px solid #666666;
+padding: 10px;
+border-radius:10px;
+cursor: pointer;
+
+
+@media (min-width: 320px) and (max-width:480px){
+
+padding: 5px;
+font-size:14pt
+
+
+}
 `;

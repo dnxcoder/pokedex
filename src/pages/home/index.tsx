@@ -14,7 +14,9 @@ import {
     RightButton,
     ButtonCloseModal,
     PokemonImgStyled,
-    PokeballBackGround
+    PokeballBackGround,
+    TitleFooter,
+    ButtonToggle
 } from './styles';
 import pokemonListJson from '../../Json/pokemonsList.json';
 import pokeballLogo from '../../assets/pokeball-logoBG.png'
@@ -30,8 +32,9 @@ export default function Home() {
     const [modalVisible, setModalVisible] = useState('none');
     const [selectedPokemon, setSelectedPokemon] = useState<iPokemon>();
     const [moveModal, setMoveModal] = useState("100%");
+    //const [activeToggleButton, setActiveToggleButton] = useState('description');
 
-    const [nextPokemonMove, setNextPokemonMove] = useState({ position: "0%", transition: "0s", height:'auto' });
+    const [nextPokemonMove, setNextPokemonMove] = useState({ position: "0%", transition: "0s", height: 'auto' });
 
     useEffect(() => {
 
@@ -70,20 +73,20 @@ export default function Home() {
         const newPokemonSelected = pokemonListJson[selectedPokemon?.id || 0];
 
 
-        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "-100%", height:'0%' });
+        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "-100%", height: '0%' });
 
-        
+
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0s", position: "100%", height:'0%' });
+            setNextPokemonMove({ transition: "0s", position: "100%", height: '0%' });
         }, 600);
 
-        
+
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", height:'100%' });
+            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", height: '100%' });
         }, 700);
 
     }
@@ -94,19 +97,19 @@ export default function Home() {
 
         const newPokemonSelected = pokemonListJson[previousIndex];
 
-        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "100%", height:'0%' });
+        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "100%", height: '0%' });
 
-        
+
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0s", position: "-100%", height:'0%' });
+            setNextPokemonMove({ transition: "0s", position: "-100%", height: '0%' });
         }, 600);
 
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", height:'100%' });
+            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", height: '100%' });
         }, 700);
     }
 
@@ -186,8 +189,17 @@ export default function Home() {
                         </RightButton>
                     </MiddleModal>
                     <FooterModal>
+                        <TitleFooter>
+                            <ButtonToggle>
+                                Description
+                            </ButtonToggle>
+                            <ButtonToggle>
+                                Evolution
+                            </ButtonToggle>
+                        </TitleFooter>
+                        {selectedPokemon?.behavior}
                     </FooterModal>
-                    
+
                 </Modal>
                 <ButtonCloseModal
                     onClick={closeModal}>

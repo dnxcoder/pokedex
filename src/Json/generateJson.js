@@ -1,16 +1,21 @@
 const axios = require('axios');
 const fs = require('fs');
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
 
 async function generateJson() {
 
     let vectorPokemon = [];
 
     try {
-        for (let i = 1; i <= 898; i++) {
+        for (let i = 1; i <= 300; i++) {
 
             const fetchPokemonList = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
 
             const pokemon = fetchPokemonList.data;
+
+            const pokemonBehavior = await getPokemonBehavior(pokemon.name);
 
             const pokemonFormated = {
                 id: pokemon.id,
@@ -18,19 +23,21 @@ async function generateJson() {
                 type: pokemon.types,
                 height: pokemon.height,
                 weight: pokemon.weight,
+                behavior: pokemonBehavior
             };
 
             vectorPokemon.push(pokemonFormated);
-
+            console.log(pokemonFormated);
         };
 
 
-        fs.writeFileSync('./pokemonsList.json', JSON.stringify(vectorPokemon), (err, data) => {
+        fs.writeFileSync('./newPokemonsList.json', JSON.stringify(vectorPokemon), (err, data) => {
 
             if (err) { console.error(err); return; }
 
             console.log("File has been created");
         })
+
 
     } catch (error) {
 
@@ -39,4 +46,32 @@ async function generateJson() {
 
 
 }
+
+async function getPokemonBehavior(pokemon) {
+
+    if (pokemon == 'nidoran-f') {
+        pokemon = 'nidoran-female';
+    }
+
+    if (pokemon == 'nidoran-m') {
+        pokemon = 'nidoran-male';
+    }
+
+    const fetchBehavior = await axios.get(`https://www.pokemon.com/br/pokedex/${pokemon}`);
+
+        const allDomPage = new JSDOM(fetchBehavior.data.toString()).window.document;
+
+        const pSelected = allDomPage.querySelector('.version-y');
+
+        const pokemonBehavior = pSelected.innerHTML;
+
+
+        let pkmnBehaviorFormated = pokemonBehavior.trim();
+        pkmnBehaviorFormated = pkmnBehaviorFormated.replace('/n', '');
+        return (pkmnBehaviorFormated);
+  
+}
+
+
+//getPokemonBehavior('Pikachu');
 generateJson();
