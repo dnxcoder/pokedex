@@ -128,7 +128,6 @@ color:#FFF;
 width: 30vw;
 height: 95vh;
 background-color:${(props) => backgroundKindColor(props.backgroundColor)};
-background-image: url(${pokeballLogo});
 background-repeat: no-repeat;
 background-position: top;
 background-size: cover;
@@ -171,6 +170,24 @@ padding: 20px 35px 0 35px;
 }
 
 `;
+
+export const PokeballBackGround = styled.img`
+
+width: 100%;
+position: absolute;
+left: 0;
+animation: rotatePokeBall infinite 4s linear;
+
+@keyframes rotatePokeBall{
+
+to {
+    transform: rotate(360deg);
+}
+
+}
+`;
+
+
 
 export const ButtonCloseModal = styled.div`
 
@@ -276,6 +293,30 @@ transition: ${(props)=> props.pkmnTransition} ;
 left:${(props)=> props.pkmnImagePosition} ;
 height: ${(props)=> props.pkmnImageHeight};
 object-fit: contain;
+
+
+:hover{
+    animation: movePokemon infinite 1s linear;
+}
+
+@keyframes movePokemon {
+
+    0%{
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(-45deg) translateX(-25%);
+    }
+    50%{
+        transform: rotate(0deg);
+    }
+    75%{
+        transform: rotate(45deg) translateX(25%);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
 `;
 
 export const RightButton = styled.div`

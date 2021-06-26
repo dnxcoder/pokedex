@@ -13,9 +13,11 @@ import {
     LeftButton,
     RightButton,
     ButtonCloseModal,
-    PokemonImgStyled
+    PokemonImgStyled,
+    PokeballBackGround
 } from './styles';
 import pokemonListJson from '../../Json/pokemonsList.json';
+import pokeballLogo from '../../assets/pokeball-logoBG.png'
 
 import { iPokemon } from '../../interfaces';
 import { convertCode } from '../../functions/convertCode';
@@ -137,6 +139,7 @@ export default function Home() {
                     onClick={stopPropagation}
                     backgroundColor={selectedPokemon?.type[0].type.name}
                 >
+                    <PokeballBackGround src={pokeballLogo} />
                     <header>
                         <span>
                             {selectedPokemon?.name}
@@ -184,6 +187,7 @@ export default function Home() {
                     </MiddleModal>
                     <FooterModal>
                     </FooterModal>
+                    
                 </Modal>
                 <ButtonCloseModal
                     onClick={closeModal}>
