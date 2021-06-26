@@ -30,7 +30,7 @@ const Card: React.FC<DivProps> = (props) => {
     }
 
     return (
-        <Container {...props}>
+        <Container {...props} className="card">
             <PokeCode >
                 {codeFormated}
             </PokeCode>

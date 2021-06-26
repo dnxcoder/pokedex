@@ -39,6 +39,36 @@ span {
     font-weight:bold;
 }
 
+
+:hover img{
+    animation: shakePokemon 0.1s linear 3 forwards ;
+}
+
+@keyframes shakePokemon {
+
+0%{
+ transform: translateX(0%);
+}
+
+25%{
+    transform: translateX(-5%) ;
+}
+
+50%{
+    transform: translateX(0%)
+}
+
+75%{
+    transform: translateX(5%);
+}
+
+100%{
+    transform: translateX(0%);
+}
+
+}
+
+
 @media (max-width:480px){
 
 width:100%;

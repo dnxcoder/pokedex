@@ -4,13 +4,13 @@ import { motion } from 'framer-motion';
 
 interface iPokemonIMG extends InputHTMLAttributes<HTMLImageElement> {
 
-    pokeCode:number;
-    width?:string;
-    height?:string;
-    position?:string;
-    zindex?:string;
-    right?:string;
-    bottom?:string;
+    pokeCode: number;
+    width?: string;
+    height?: string;
+    position?: string;
+    zindex?: string;
+    right?: string;
+    bottom?: string;
 }
 
 export const PokemonIMGStyled = styled(motion.img)`
@@ -18,11 +18,12 @@ export const PokemonIMGStyled = styled(motion.img)`
 
 width:${(props) => props.width};
 height:${(props => props.height)};
-position:${(props: iPokemonIMG )=> props.position} ;
-z-index: ${(props: iPokemonIMG )=> props.zindex};
-right: ${(props: iPokemonIMG )=> props.right};
-bottom: ${(props: iPokemonIMG )=> props.bottom};
+position:${(props: iPokemonIMG) => props.position} ;
+z-index: ${(props: iPokemonIMG) => props.zindex};
+right: ${(props: iPokemonIMG) => props.right};
+bottom: ${(props: iPokemonIMG) => props.bottom};
 object-fit: contain;
+
 
 @media (min-width:0px) and (max-width:319px){
 
