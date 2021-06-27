@@ -267,6 +267,7 @@ font-weight: bold;
 font-size: 14pt;
 position: absolute;
 left:0;
+top:-30px;
 z-index: 4;
 `;
 
@@ -298,7 +299,7 @@ position: absolute;
     width:4em;
     height: 4em;
     cursor: pointer;
-
+    z-index:22;
 `;
 
 export const PokemonImgStyled = styled.img<iPkmnImagePosition>`
@@ -308,7 +309,7 @@ transition: ${(props) => props.pkmnTransition} ;
 left:${(props) => props.pkmnImagePosition} ;
 transform-origin: bottom center;
 transform: ${(props)=> props.pkmnTranslate};
-
+z-index: 10;
 object-fit: contain;
 
 :hover{
@@ -348,6 +349,7 @@ export const RightButton = styled.div`
     width:4em;
     height: 4em;
     cursor: pointer;
+    z-index:22;
 `;
 
 export const FooterModal = styled.footer<any>`
