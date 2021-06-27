@@ -34,7 +34,7 @@ export default function Home() {
     const [moveModal, setMoveModal] = useState("100%");
     //const [activeToggleButton, setActiveToggleButton] = useState('description');
 
-    const [nextPokemonMove, setNextPokemonMove] = useState({ position: "0%", transition: "0s", height: 'auto' });
+    const [nextPokemonMove, setNextPokemonMove] = useState({ position: "0%", transition: "0s", translate:'translateY(0%)' });
 
     useEffect(() => {
 
@@ -73,20 +73,20 @@ export default function Home() {
         const newPokemonSelected = pokemonListJson[selectedPokemon?.id || 0];
 
 
-        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "-100%", height: '0%' });
+        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "-100%", translate: 'scale(0%)' });
 
 
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0s", position: "100%", height: '0%' });
+            setNextPokemonMove({ transition: "0s", position: "100%", translate:'scale(0%)' });
         }, 600);
 
 
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", height: '100%' });
+            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", translate:'scale(100%)' });
         }, 700);
 
     }
@@ -97,19 +97,19 @@ export default function Home() {
 
         const newPokemonSelected = pokemonListJson[previousIndex];
 
-        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "100%", height: '0%' });
+        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "100%",  translate:'scale(0%)' });
 
 
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0s", position: "-100%", height: '0%' });
+            setNextPokemonMove({ transition: "0s", position: "-100%", translate:'scale(0%)' });
         }, 600);
 
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", height: '100%' });
+            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", translate:'scale(100%)' });
         }, 700);
     }
 
@@ -153,16 +153,22 @@ export default function Home() {
                     </header>
                     <MiddleModal
                         backgroundColor={selectedPokemon?.type[0].type.name}
-                    >
+                    >                      
                         {
-                            selectedPokemon?.type.map(kind => {
+                            selectedPokemon?.type.map((kind, index) => {
                                 return (
-                                    <KindPokemon kind={kind.type.name}>
+                                    <KindPokemon kind={kind.type.name} index={index}>
                                         {kind.type.name}
                                     </KindPokemon>
                                 )
                             })
                         }
+                        <PokemonImgStyled
+                            pkmnTransition={nextPokemonMove.transition}
+                            pkmnImagePosition={nextPokemonMove.position}
+                            pkmnTranslate={nextPokemonMove.translate}
+                            src={takePokemonByCode(selectedPokemon?.id || 1)}
+                        />
                         <LeftButton backgroundColor={selectedPokemon?.type[0].type.name || ''}
                             onClick={previousPokemon}
                         >
@@ -172,12 +178,6 @@ export default function Home() {
                                 width="40px"
                             />
                         </LeftButton>
-                        <PokemonImgStyled
-                            pkmnTransition={nextPokemonMove.transition}
-                            pkmnImagePosition={nextPokemonMove.position}
-                            pkmnImageHeight={nextPokemonMove.height}
-                            src={takePokemonByCode(selectedPokemon?.id || 1)}
-                        />
                         <RightButton backgroundColor={selectedPokemon?.type[0].type.name || ''}
                             onClick={nextPokemon}
                         >

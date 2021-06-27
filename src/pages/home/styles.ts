@@ -20,6 +20,7 @@ interface iModal extends InputHTMLAttributes<HTMLDivElement> {
 interface iKindPokemon extends InputHTMLAttributes<HTMLDivElement> {
 
     kind: string;
+    index: number;
 }
 
 interface iPkmnImagePosition extends InputHTMLAttributes<HTMLImageElement> {
@@ -27,6 +28,7 @@ interface iPkmnImagePosition extends InputHTMLAttributes<HTMLImageElement> {
     pkmnImagePosition?: string;
     pkmnTransition?: string;
     pkmnImageHeight?: string;
+    pkmnTranslate?: string;
 }
 
 
@@ -136,13 +138,17 @@ box-shadow: 8px 9px 7px -4px rgba(0,0,0,0.52);
 box-sizing: border-box;
 padding: 30px 50px 30px 50px;
 position: absolute;
-
+display: flex;
+flex-direction: column;
+align-items: center;
 overflow: hidden;
 
 
 header{
 
 display:flex;
+margin-bottom: 20px;
+width:100%;
 justify-content:space-between;
 font-family: ${myFonts.title};
 font-weight: bold;
@@ -239,9 +245,10 @@ cursor: pointer;
 
 `;
 
-export const KindPokemon = styled.div`
+export const KindPokemon = styled.div<iKindPokemon>`
 
-background-color: ${(props: iKindPokemon) => kindColors(props.kind)};
+background-color: ${(props) => kindColors(props.kind)};
+transform: ${(props) => {return (props.index===1) && 'translateY(110%)'}};
 width: 87px;
 height:44px;
 border-radius:36px;
@@ -262,10 +269,12 @@ export const MiddleModal: any = styled.section`
 display: flex;
 position: relative;
 justify-content:center;
+width:100%;
+height: 40%;
 
 img{
     background-image:#FFF;
-    width:80%;
+    width:100%;
 }
 
 `;
@@ -291,14 +300,14 @@ export const PokemonImgStyled = styled.img<iPkmnImagePosition>`
 position: relative;
 transition: ${(props) => props.pkmnTransition} ;
 left:${(props) => props.pkmnImagePosition} ;
-height: ${(props) => props.pkmnImageHeight};
+transform-origin: bottom center;
+transform: ${(props)=> props.pkmnTranslate};
+
 object-fit: contain;
 
 :hover{
     animation: movePokemon infinite 1s linear;
 }
-
-
 
 @keyframes movePokemon {
 
@@ -306,13 +315,13 @@ object-fit: contain;
         transform: rotate(0deg);
     }
     25%{
-        transform: rotate(-45deg) translateX(-25%);
+        transform: rotate(-15deg) translateX(-10%);
     }
     50%{
         transform: rotate(0deg);
     }
     75%{
-        transform: rotate(45deg) translateX(25%);
+        transform: rotate(15deg) translateX(10%);
     }
     100%{
         transform: rotate(0deg);
