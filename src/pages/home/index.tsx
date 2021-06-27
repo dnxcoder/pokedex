@@ -76,7 +76,16 @@ export default function Home() {
 
     function nextPokemon() {
 
-        const newPokemonSelected = pokemonListJson[selectedPokemon?.id || 0];
+        console.log(selectedPokemon?.id);
+
+        let newPokemonSelected :any = null;
+        if ((selectedPokemon?.id || 0) >= pokemonListJson.length) {
+            newPokemonSelected = pokemonListJson[0];
+        }else{
+            
+            newPokemonSelected = pokemonListJson[selectedPokemon?.id || 0];
+        }
+
 
 
         setNextPokemonMove({ transition: "0.5s ease-in-out", position: "-100%", translate: 'scale(0%)' });
@@ -99,7 +108,11 @@ export default function Home() {
 
     function previousPokemon() {
 
-        const previousIndex = ((selectedPokemon?.id || 0) - 2);
+        let previousIndex = ((selectedPokemon?.id || 0) - 2);
+
+        if (previousIndex <= -1) {
+            previousIndex = pokemonListJson.length -1;
+        }
 
         const newPokemonSelected = pokemonListJson[previousIndex];
 
@@ -120,7 +133,7 @@ export default function Home() {
     }
 
     async function handleClickBehave() {
-        setFlipFooter('rotateY(180deg) scale(-1, 1)');
+        setFlipFooter('rotateY(0deg)');
 
         setTimeout(() => {
             setBehaviorActive(true);
@@ -130,8 +143,8 @@ export default function Home() {
     }
 
     function handleClickDescription() {
-        setFlipFooter('rotateY(0deg)');
-        
+        setFlipFooter('rotateY(-180deg) scale(-1, 1)');
+
         setTimeout(() => {
             setBehaviorActive(false);
         }, 200);
