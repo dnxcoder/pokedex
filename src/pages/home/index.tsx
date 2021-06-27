@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Card from '../../components/Card';
+import Description from '../../components/Description';
 
+// Styled Components
 import {
     Screen,
     CardsContainer,
@@ -16,7 +18,7 @@ import {
     PokemonImgStyled,
     PokeballBackGround,
     TitleFooter,
-    ButtonToggle
+    ButtonToggle,
 } from './styles';
 import pokemonListJson from '../../Json/pokemonsList.json';
 import pokeballLogo from '../../assets/pokeball-logoBG.png'
@@ -32,9 +34,13 @@ export default function Home() {
     const [modalVisible, setModalVisible] = useState('none');
     const [selectedPokemon, setSelectedPokemon] = useState<iPokemon>();
     const [moveModal, setMoveModal] = useState("100%");
-    //const [activeToggleButton, setActiveToggleButton] = useState('description');
+    const [behaviorActive, setBehaviorActive] = useState(true);
 
-    const [nextPokemonMove, setNextPokemonMove] = useState({ position: "0%", transition: "0s", translate:'translateY(0%)' });
+    const [flipFooter, setFlipFooter] = useState('');
+
+    const footerRef = useRef(null);
+
+    const [nextPokemonMove, setNextPokemonMove] = useState({ position: "0%", transition: "0s", translate: 'translateY(0%)' });
 
     useEffect(() => {
 
@@ -79,14 +85,14 @@ export default function Home() {
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0s", position: "100%", translate:'scale(0%)' });
+            setNextPokemonMove({ transition: "0s", position: "100%", translate: 'scale(0%)' });
         }, 600);
 
 
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", translate:'scale(100%)' });
+            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", translate: 'scale(100%)' });
         }, 700);
 
     }
@@ -97,20 +103,39 @@ export default function Home() {
 
         const newPokemonSelected = pokemonListJson[previousIndex];
 
-        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "100%",  translate:'scale(0%)' });
+        setNextPokemonMove({ transition: "0.5s ease-in-out", position: "100%", translate: 'scale(0%)' });
 
 
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0s", position: "-100%", translate:'scale(0%)' });
+            setNextPokemonMove({ transition: "0s", position: "-100%", translate: 'scale(0%)' });
         }, 600);
 
         setTimeout(() => {
 
             setSelectedPokemon(newPokemonSelected);
-            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", translate:'scale(100%)' });
+            setNextPokemonMove({ transition: "0.7s ease-in-out", position: "0%", translate: 'scale(100%)' });
         }, 700);
+    }
+
+    async function handleClickBehave() {
+        setFlipFooter('rotateY(180deg) scale(-1, 1)');
+
+        setTimeout(() => {
+            setBehaviorActive(true);
+        }, 200);
+
+
+    }
+
+    function handleClickDescription() {
+        setFlipFooter('rotateY(0deg)');
+        
+        setTimeout(() => {
+            setBehaviorActive(false);
+        }, 200);
+
     }
 
     return (
@@ -153,7 +178,7 @@ export default function Home() {
                     </header>
                     <MiddleModal
                         backgroundColor={selectedPokemon?.type[0].type.name}
-                    >                      
+                    >
                         {
                             selectedPokemon?.type.map((kind, index) => {
                                 return (
@@ -188,16 +213,39 @@ export default function Home() {
                             />
                         </RightButton>
                     </MiddleModal>
-                    <FooterModal>
+                    <FooterModal ref={footerRef} transformFooterModal={flipFooter}>
                         <TitleFooter>
-                            <ButtonToggle>
+                            <ButtonToggle
+                                active={behaviorActive}
+                                onClick={handleClickBehave}
+                                btnColor={selectedPokemon?.type[0].type.name || ''}
+                            >
+                                Behavior
+                            </ButtonToggle>
+                            <ButtonToggle
+                                active={!behaviorActive}
+                                onClick={handleClickDescription}
+                                btnColor={selectedPokemon?.type[0].type.name || ''}
+                            >
                                 Description
                             </ButtonToggle>
-                            <ButtonToggle>
-                                Evolution
-                            </ButtonToggle>
                         </TitleFooter>
-                        {selectedPokemon?.behavior}
+                        {behaviorActive ?
+
+                            selectedPokemon?.behavior
+
+                            :
+
+                            <Description
+                                id={selectedPokemon?.id || 0}
+                                name={selectedPokemon?.name || ''}
+                                height={selectedPokemon?.height || 0}
+                                weight={selectedPokemon?.weight || 0}
+                                experience={selectedPokemon?.experience || 0}
+                                behavior={selectedPokemon?.behavior || ''}
+                                type={selectedPokemon?.type || []}
+                            />
+                        }
                     </FooterModal>
 
                 </Modal>

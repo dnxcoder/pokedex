@@ -31,6 +31,12 @@ interface iPkmnImagePosition extends InputHTMLAttributes<HTMLImageElement> {
     pkmnTranslate?: string;
 }
 
+interface iButtonToggle extends InputHTMLAttributes<HTMLDivElement> {
+
+    active:boolean;
+    btnColor: string;
+}
+
 
 export const Screen = styled.div`
 
@@ -344,7 +350,7 @@ export const RightButton = styled.div`
     cursor: pointer;
 `;
 
-export const FooterModal: any = styled.footer`
+export const FooterModal = styled.footer<any>`
 
 position: absolute;
 width: 100%;
@@ -361,6 +367,8 @@ color: #666666;
 border-radius:25px;
 bottom:0;
 text-align: center;
+transition: 0.4s linear;
+transform: ${(props)=>props.transformFooterModal};
 
 @media (min-width: 320px) and (max-width:480px){
 
@@ -398,7 +406,7 @@ margin-bottom: 10px;
 
 `;
 
-export const ButtonToggle = styled.div`
+export const ButtonToggle = styled.div<iButtonToggle>`
 
 
 box-sizing: border-box;
@@ -406,6 +414,9 @@ border:2px solid #666666;
 padding: 10px;
 border-radius:10px;
 cursor: pointer;
+border-color: ${(props => props.active? kindColors(props.btnColor): '')};
+color:  ${(props=> props.active? '#FFF' : '')};
+background-color: ${(props=> props.active? kindColors(props.btnColor) : 'rgba(0,0,0,0)')};
 
 
 @media (min-width: 320px) and (max-width:480px){
@@ -414,5 +425,9 @@ padding: 5px;
 font-size:14pt
 
 
-}
+} 
+`;
+
+export const DescriptionStyled = styled.div`
+
 `;

@@ -6,6 +6,7 @@ export interface iPokemon {
     height: number;
     weight: number;
     behavior:string;
+    experience:number;
 
 }
 
