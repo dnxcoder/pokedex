@@ -76,8 +76,6 @@ export default function Home() {
 
     function nextPokemon() {
 
-        console.log(selectedPokemon?.id);
-
         let newPokemonSelected :any = null;
         if ((selectedPokemon?.id || 0) >= pokemonListJson.length) {
             newPokemonSelected = pokemonListJson[0];
@@ -195,7 +193,7 @@ export default function Home() {
                         {
                             selectedPokemon?.type.map((kind, index) => {
                                 return (
-                                    <KindPokemon kind={kind.type.name} index={index}>
+                                    <KindPokemon kind={kind.type.name} index={index} key={index}>
                                         {kind.type.name}
                                     </KindPokemon>
                                 )
