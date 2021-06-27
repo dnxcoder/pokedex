@@ -9,7 +9,7 @@ async function generateJson() {
     let vectorPokemon = [];
 
     try {
-        for (let i = 1; i <= 300; i++) {
+        for (let i = 1; i <= 380; i++) {
 
             const fetchPokemonList = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
 
@@ -23,6 +23,7 @@ async function generateJson() {
                 type: pokemon.types,
                 height: pokemon.height,
                 weight: pokemon.weight,
+                experience:pokemon.base_experience,
                 behavior: pokemonBehavior
             };
 
